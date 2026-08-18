@@ -1,0 +1,26 @@
+# Dữ liệu gốc chứa thông tin cá nhân khách hàng — KHÔNG BAO GIỜ commit
+data/raw/
+*.xlsx
+*.xls
+~$*
+
+# Bản trung gian còn cột itemName (lộ thương hiệu shop) — chỉ orders_parsed
+# (đã bỏ itemName) mới được commit. Xem docs/data_quality.md.
+data/clean/orders_clean.parquet
+
+# Môi trường Python
+venv/
+__pycache__/
+*.pyc
+
+# Notebook
+.ipynb_checkpoints/
+
+# Hệ điều hành / IDE
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+
+# DuckDB
+*.duckdb
+*.duckdb.wal

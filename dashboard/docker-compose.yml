@@ -1,0 +1,14 @@
+services:
+  superset:
+    build: .
+    container_name: lazada_superset
+    ports:
+      - "8088:8088"
+    environment:
+      - SUPERSET_SECRET_KEY=lazada_portfolio_dev_key_doi_truoc_khi_public
+    volumes:
+      - ../data/clean:/app/data:rw
+      - superset_home:/app/superset_home
+
+volumes:
+  superset_home:
