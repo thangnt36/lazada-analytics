@@ -370,7 +370,7 @@ tích hành vi khách hàng. Thêm cột `is_bulk_operational` (`n_items >= 20`)
 | | Trước khi loại | Sau khi loại |
 |---|---|---|
 | Tổng số đơn | 14.330 | 13.916 |
-| Tỷ lệ đơn không hoàn tất | ~46% | **28,5%** |
+| Tỷ lệ đơn không hoàn tất | 30,1% | **28,5%** |
 | Doanh thu thất thoát (toàn kỳ) | 796.499.415đ | **282.533.779đ** |
 | Đỉnh bất thường tháng 07/2021 | 181.557.024đ | 15.545.390đ (đã về mức bình thường) |
 
@@ -381,3 +381,11 @@ project thực chất phản ánh vận hành nội bộ, không phải hành vi
 **Bắt buộc áp dụng cách lọc này cho cả Phân tích 2** (Flash sale có lãi
 không) — nếu không, tỷ lệ huỷ của nhóm `campaign_flag = FS` sẽ bị thổi phồng
 giả tạo bởi chính cụm đơn này, dẫn tới kết luận sai.
+
+**Lưu ý khi đối chiếu với dashboard Power BI:** bảng trên dùng doanh thu GỘP
+(`unitPrice`, chưa trừ `sellerDiscountTotal`) để khớp với `sql/02_phan_tich_1...`.
+Dashboard Power BI (`docs/PowerBI-huong-dan-tung-buoc.md`) dùng
+`doanh_thu_thuan = unitPrice - sellerDiscountTotal` (đã trừ discount, đúng quy
+ước mục 15) nên số tuyệt đối sẽ khác — 756.472.283đ / 271.400.186đ thay vì
+796.499.415đ / 282.533.779đ. Tỷ lệ % (30,1% / 28,5%) thì giống nhau ở cả 2 nơi
+vì tỷ lệ tính trên số ĐƠN, không phụ thuộc cách tính doanh thu.

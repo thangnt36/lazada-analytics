@@ -77,13 +77,13 @@ Ba phát hiện làm thay đổi con số headline của cả project (chi tiế
 2. **414 đơn (≥20 sản phẩm/đơn) là cụm đơn vận hành nội bộ**, không đại diện
    cho nhu cầu khách hàng thông thường — loại hoàn toàn khỏi mọi phân tích
    hành vi khách hàng (`dim_order_customer`/`fact_order_item_customer`).
-   Việc này đổi tỷ lệ đơn không hoàn tất từ ~46% xuống **28,5%**, và doanh thu
+   Việc này đổi tỷ lệ đơn không hoàn tất từ 30,1% xuống **28,5%**, và doanh thu
    thất thoát từ 796,5tr xuống **282,5tr**.
 3. **`unitPrice` là giá niêm yết trước discount**, không phải giá thực trả.
    Lãi gộp thực nhận = `unitPrice - sellerDiscountTotal - giá vốn`
    (`platformDiscountTotal` do Lazada hoàn riêng, không trừ vào lãi shop).
 
-## Dashboard
+## Dashboard Superset
 
 Dựng bằng Apache Superset (Docker), kết nối trực tiếp vào file DuckDB — 3
 trang: Kinh doanh, Sản phẩm, Vận hành.
@@ -92,6 +92,27 @@ trang: Kinh doanh, Sản phẩm, Vận hành.
 
 Superset chạy local qua Docker, không public hosting — cách dựng lại:
 [`dashboard/README.md`](dashboard/README.md).
+
+## Dashboard Power BI
+
+Ba trang dựng trên cùng star schema DuckDB ở trên, xuất qua CSV rồi nạp vào
+Power BI Desktop (data model, quan hệ 1 chiều, DAX time intelligence và Pareto).
+File gốc: [`lazada_analytics.pbix`](lazada_analytics.pbix).
+
+![Kinh doanh](screenshots/powerbi/01_kinh_doanh.png)
+![Sản phẩm](screenshots/powerbi/02_san_pham.png)
+![Vận hành](screenshots/powerbi/03_van_hanh.png)
+
+Trang Vận hành có nút bật/tắt cụm 414 đơn vận hành nội bộ — bấm để thấy doanh
+thu thất thoát đổi từ 756,5tr xuống 271,4tr (giảm 64%).
+
+Biên lợi nhuận chỉ tính trên phần danh mục đã map được giá vốn (158/196 mã);
+tỷ lệ phủ hiển thị ngay trên trang Kinh doanh.
+
+**Lưu ý:** con số ở dashboard Power BI (doanh thu, doanh thu thất thoát) dùng
+`unitPrice - sellerDiscountTotal` (chưa gồm phí ship), khác cách tính ở SQL/Superset
+(`paidPrice`, đã gồm ship) — xem `docs/data_quality.md` mục 14 phần lưu ý đối
+chiếu 2 nơi.
 
 ## Ba bài phân tích chính
 

@@ -8,6 +8,9 @@ data/raw/
 # (đã bỏ itemName) mới được commit. Xem docs/data_quality.md.
 data/clean/orders_clean.parquet
 
+# Export CSV cho Power BI — du lieu kinh doanh, khong dua len repo cong khai
+export/
+
 # Môi trường Python
 venv/
 __pycache__/
